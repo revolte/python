@@ -53,7 +53,7 @@ def get_url():
     url = (user_input.get())
     # set the download path and download the video
     yt = YouTube(url)
-    print('The video name and size : ', yt.title, yt.streams.first().filesize_mb, 'Mb')
+    print('The video name and size : ', yt.streams.get_highest_resolution().filesize_mb, 'Mb')
     yt = YouTube(url, on_progress_callback=on_progress)
     yt.streams.get_highest_resolution().download(filename)
     Label(window, width=20, text='Download Finished', bg='green').grid(row=5, column=0)
@@ -62,7 +62,7 @@ def get_url():
 # grid() = geometry manager that organizes widgets in a table-like structure in a parent widget
 
 
-titleLabel = Label(window, text="Youtube Video Downloader", font=("Arial", 20), fg='Blue', bg='Red')
+titleLabel = Label(window, text="Youtube Video Downloader", font=("Arial bold", 20))
 titleLabel.grid(row=0, column=0, columnspan=2)
 
 Path_button = Button(window, text="Path location", width=20, command=browse_button)
