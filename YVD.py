@@ -3,9 +3,11 @@ from tkinter import Entry, StringVar, ttk
 from tkinter import filedialog
 import ttkbootstrap as tk
 from pytube import YouTube
+import tkinter.messagebox as tkmb
+
 
 window = tk.Window()
-window.iconbitmap('Icon.ico')
+# window.iconbitmap('Icon.ico')
 window.title('Video Downloader')
 user_input = tk.StringVar(window)
 folder_path: StringVar = StringVar()
@@ -53,10 +55,10 @@ def get_url():
     url = (user_input.get())
     # set the download path and download the video
     yt = YouTube(url)
-    print('The video name and size : ', yt.streams.get_highest_resolution().filesize_mb, 'Mb')
+    print('The video size : ', yt.streams.get_highest_resolution().filesize_mb, 'Mb')
     yt = YouTube(url, on_progress_callback=on_progress)
     yt.streams.get_highest_resolution().download(filename)
-    Label(window, width=20, text='Download Finished', bg='green').grid(row=5, column=0)
+    tkmb.showinfo("Download", "Download finished", parent=window)
 
 
 # grid() = geometry manager that organizes widgets in a table-like structure in a parent widget
